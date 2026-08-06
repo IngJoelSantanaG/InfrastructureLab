@@ -1,11 +1,19 @@
 pipeline {
    agent any
 
+   options {
+      timestamps()
+
+       }
+
      stages {
-           stage('Display Information') {
+        
+           stage('Environment') {
                 steps {
-                  sh 'pwd'
-                  sh 'ls -la'
+                  sh 'echo "User: $(whoami)"'
+                  sh 'echo "Workspace: $(pwd)"'
+                  sh 'java --version'
+                  sh 'git --version'
 
             }
 
@@ -28,5 +36,26 @@ pipeline {
            }
 
          }
+
+      post {
+        always {
+            echo 'Pipeline finished.'
+
+          }
+
+       success {
+           echo 'Build SUCCESS'
+
+          }
+
+       failure {
+           echo 'Build FAILED!'
+
+         }
+
+       }
+
+    }
+
 
       }
