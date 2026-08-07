@@ -13,7 +13,7 @@ pipeline {
                   sh 'echo "User: $(whoami)"'
                   sh 'echo "Workspace: $(pwd)"'
                   sh 'java --version'
-                  sh 'git --version'
+                  sh 'mvn --version'
 
             }
 
@@ -21,7 +21,7 @@ pipeline {
 
      stage('Compile') {
           steps {
-              sh 'javac HelloWorld.java'
+              sh 'mvn clean compile'
               
             }
 
@@ -29,7 +29,7 @@ pipeline {
 
       stage('Run') {
            steps {
-              sh 'java HelloWorld'
+              sh 'java -cp target/classes HelloWorld'
 
              }
 
