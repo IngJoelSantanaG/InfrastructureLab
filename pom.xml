@@ -10,6 +10,8 @@ xsi:schemaLocation="http:maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd
 
 <version>1.0</version>
 
+<packaging>war</packaging>
+
 <properties>
 <maven.compiler.source>21</maven.compiler.source>
 <maven.compiler.target>21</maven.compiler.target>
