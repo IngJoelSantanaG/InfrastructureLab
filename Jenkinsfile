@@ -29,7 +29,7 @@ pipeline {
 
       stage('Deploy') {
            steps {
-              sh 'cp target/infrastructure-lab-1.0.war var/lib/tomcat10/webapps'
+              sh 'cp target/infrastructure-lab-1.0.war var/lib/tomcat10/webapps/'
 
              }
 
