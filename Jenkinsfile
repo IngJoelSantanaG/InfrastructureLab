@@ -19,17 +19,17 @@ pipeline {
 
          }
 
-     stage('Compile') {
+     stage('Build') {
           steps {
-              sh 'mvn clean compile'
+              sh 'mvn clean package'
               
             }
 
          }
 
-      stage('Run') {
+      stage('Deploy') {
            steps {
-              sh 'java -cp target/classes HelloWorld'
+              sh 'cp target/infrastructure-lab-1.0.war var/lib/tomcat10/webapps'
 
              }
 
@@ -44,12 +44,12 @@ pipeline {
           }
 
        success {
-           echo 'Build SUCCESS'
+           echo 'Build or deployment SUCCESS'
 
           }
 
        failure {
-           echo 'Build FAILED!'
+           echo 'Build or deployment FAILED!'
 
          }
 
