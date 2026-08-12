@@ -41,7 +41,9 @@ pipeline {
                 
                    curl -f http://localhost:8080/infrastructure-lab-1.0/ \
                    | grep -q "Hello Joel!"
-                    
+                   
+                   curl -f http://localhost:8080/infrastructure-lab-1.0/ \
+                   | grep -q "Infrastructure Lab v2" 
                  
                   echo "Application verification successful!"
 
