@@ -6,7 +6,11 @@
 </head>
 
 <body>
-   <h1>Hello Joel!</h1>
+   <h1>
+       Hello Joel!
+       Infrastructure Lab v2
+
+  </h1>
    <p>Welcome to my Infrastructure Lab.</p>
    <p>Github + Jenkins + Maven + Tomcat</p>
 </body>
