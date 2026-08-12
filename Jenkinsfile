@@ -38,9 +38,13 @@ pipeline {
           steps {
               sh '''
                    echo "Checking deployed application..."
-                   curl -f http://localhost:8080/infrastructure-lab-1.0/ \ | grep -q "Hello Joel!"
-                   
-                   echo "Application verification successful!"
+                
+                   curl -f http://localhost:8080/infrastructure-lab-1.0/ \
+                   | grep -q "Hello Joel!"
+                    
+                 
+                  echo "Application verification successful!"
+
                 '''
              }
            }
