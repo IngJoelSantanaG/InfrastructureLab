@@ -34,6 +34,14 @@ pipeline {
              }
 
            }
+      stage('Verify'){
+          steps {
+              sh '''
+                   echo "Checking deployed application..."
+                   curl -f http://localhost:8080/infrastructure-lab-1.0/
+                '''
+             }
+           }
 
          }
 
