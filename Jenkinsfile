@@ -29,7 +29,7 @@ pipeline {
 
       stage('Deploy') {
            steps {
-              sh 'cp target/infrastructure-lab-1.0.war /var/lib/tomcat10/webapps/'
+              sh 'cp target/infrastructure-lab-1.1.war /var/lib/tomcat10/webapps/'
 
              }
 
@@ -39,10 +39,10 @@ pipeline {
               sh '''
                    echo "Checking deployed application..."
                 
-                   curl -f http://localhost:8080/infrastructure-lab-1.0/ \
+                   curl -f http://localhost:8080/infrastructure-lab-1.1/ \
                    | grep -q "Hello Joel!"
                    
-                   curl -f http://localhost:8080/infrastructure-lab-1.0/ \
+                   curl -f http://localhost:8080/infrastructure-lab-1.1/ \
                    | grep -q "Infrastructure Lab v1.1" 
                  
                   echo "Application verification successful!"
