@@ -8,7 +8,7 @@ xsi:schemaLocation="http:maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd
 
 <artifactId>infrastructure-lab</artifactId>
 
-<version>1.0</version>
+<version>1.1</version>
 
 <packaging>war</packaging>
 

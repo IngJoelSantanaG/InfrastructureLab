@@ -8,7 +8,7 @@
 <body>
    <h1>
        Hello Joel!
-       Infrastructure Lab v2
+       Infrastructure Lab v1.1
 
   </h1>
    <p>Welcome to my Infrastructure Lab.</p>
