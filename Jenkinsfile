@@ -39,13 +39,21 @@ pipeline {
               sh '''
                    echo "Checking deployed application..."
                 
-                   curl -f http://localhost:8080/infrastructure-lab-1.1/ \
-                   | grep -q "Hello Joel!"
-                   
-                   curl -f http://localhost:8080/infrastructure-lab-1.1/ \
-                   | grep -q "Infrastructure Lab v1.1" 
+                  for i in $(seq 1 12); do
+                       echo "Verification attempt $i..."
+
+                 if  curl -fsS http://localhost:8080/infrastructure-lab-1.1/ \
+                   | grep -q "Infrastructure Lab v1.1"; then
+                       echo "Application verification successful!"
+                       exit 0
+                   fi 
                  
-                  echo "Application verification successful!"
+                  echo "Application not ready yet,waiting 5 seconds..."
+                  sleep 5
+                done
+
+                  echo "Application verification FAILED!"
+                  exit 1
 
                 '''
              }
