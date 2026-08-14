@@ -29,7 +29,7 @@ pipeline {
 
       stage('Deploy') {
            steps {
-              sh 'cp target/infrastructure-lab-1.1.war /var/lib/tomcat10/webapps/'
+              sh 'cp target/infrastructure-lab-1.2.war /var/lib/tomcat10/webapps/'
 
              }
 
@@ -42,8 +42,8 @@ pipeline {
                   for i in $(seq 1 12); do
                        echo "Verification attempt $i..."
 
-                 if  curl -fsS http://localhost:8080/infrastructure-lab-1.1/ \
-                   | grep -q "Infrastructure Lab v1.1"; then
+                 if  curl -fsS http://localhost:8080/infrastructure-lab-1.2/ \
+                   | grep -q "Infrastructure Lab v1.2"; then
                        echo "Application verification successful!"
                        exit 0
                    fi 
