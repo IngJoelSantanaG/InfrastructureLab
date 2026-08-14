@@ -84,11 +84,8 @@ pipeline {
 
             rm -f /var/lib/tomcat10/webapps/infrastructure-lab-1.2.war
             
-            echo "Deploying known-good 1.1..."
-           cp /var/lib/tomcat10/webapps/infrastructure-lab-1.1.war \
-              /var/lib/tomcat10/webapps
-            
-            echo "Waiting for Tomcat to deploy 1.1..."
+            echo "Known-good 1.1 WAR is already deployed."
+            echo "Waiting for application recovery..."
 
             for i in $(seq 1 12); do
              echo "Rollback verification attempt $i..."
