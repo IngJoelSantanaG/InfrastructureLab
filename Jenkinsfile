@@ -80,11 +80,10 @@ pipeline {
             echo "ROLLBACK STARTED"
             echo "========================================"
 
-            echo "Removing failed 1.2 deployment..."
+            echo "Removing failed 1.2 war..."
 
             rm -f /var/lib/tomcat10/webapps/infrastructure-lab-1.2.war
-            rm -rf /var/lib/tomcat10/webapps/infrastructure-lab-1.2
-
+            
             echo "Deploying known-good 1.1..."
            cp /var/lib/tomcat10/webapps/infrastructure-lab-1.1.war \
               /var/lib/tomcat10/webapps
