@@ -73,8 +73,51 @@ pipeline {
           }
 
        failure {
-           echo 'Build or deployment FAILED!'
+           echo 'Build or deployment FAILED - starting rollback'
+            
+        sh '''
+            echo "========================================"
+            echo "ROLLBACK STARTED"
+            echo "========================================"
 
+            echo "Removing failed 1.2 deployment..."
+
+            rm -f /var/lib/tomcat10/webapps/infrastructure-lab-1.2.war
+            rm -rf /var/lib/tomcat10/webapps/infrastructure-lab-1.2
+
+            echo "Deploying known-good 1.1..."
+           cp /var/lib/tomcat10/webapps/infrastructure-lab-1.1.war \
+              /var/lib/tomcat10/webapps
+            
+            echo "Waiting for Tomcat to deploy 1.1..."
+
+            for i in $(seq 1 12); do
+             echo "Rollback verification attempt $i..."
+             
+            if curl -fsS http://localhost:8080/infrastructure-lab-1.1/ \
+               | grep -q "Infrastructure Lab v1.1"; then
+
+             echo "======================================="
+             echo "ROLLBACK SUCCESSFUL"
+             echo "Infrastructure Lab 1.1 is healthy"
+             echo "======================================="
+
+             exit 0
+
+          fi
+
+             echo "1.1 not ready yet. waiting 5 seconds"
+             sleep 5
+
+         done
+
+             echo "======================================="
+             echo "ROLLBACK FAILED"
+             echo "======================================="
+             exit 1    
+                        
+
+           '''
          }
 
        }
