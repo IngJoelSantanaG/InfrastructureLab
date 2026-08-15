@@ -74,7 +74,12 @@ pipeline {
 
        failure {
            echo 'Build or deployment FAILED - starting rollback'
-            
+          
+
+       script {
+
+        try {
+
         sh '''
             echo "========================================"
             echo "ROLLBACK STARTED"
@@ -113,10 +118,22 @@ pipeline {
              exit 1    
                         
 
-           '''
+           
+            '''
+            currentBuild.result = 'UNSTABLE'
+            echo 'Deployment failed, but automatic rollback succeeded.'
+            echo 'System recovered successfully to Infrastructure Lab 1.1.'
+
+         } catch (Exception e){
+            echo 'AUTOMATIC ROLLBACK FAILED!'
+            currentBuild.result = 'FAILURE'
+            throw e           
+          
+          }
+
          }
 
        }
-
-    }
-
+     
+     }
+  }
