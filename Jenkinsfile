@@ -36,7 +36,10 @@ pipeline {
            }
       stage('Verify'){
           steps {
-              sh '''
+             scripts {
+                def verificationResult = sh ( 
+
+                  script: '''
                    echo "Checking deployed application..."
                 
                   for i in $(seq 1 12); do
@@ -44,23 +47,34 @@ pipeline {
 
                  if  curl -fsS http://localhost:8080/infrastructure-lab-1.2/ \
                    | grep -q "Infrastructure Lab v1.2"; then
+
                        echo "Application verification successful!"
                        exit 0
                    fi 
                  
                   echo "Application not ready yet,waiting 5 seconds..."
                   sleep 5
+
                 done
 
                   echo "Application verification FAILED!"
                   exit 1
 
-                '''
+                ''',
+               returnStatus: true
+
+             )
+
+             if (verificationResult !=0){
+                   echo "Deployment verification failed."
+                   echo "Continuing to post actions for automatic rollback."
+                   currentBuild.result = 'FAILURE'
+                 }
+               }
              }
            }
 
-         }
-
+        
       post {
         always {
             echo 'Pipeline finished.'
