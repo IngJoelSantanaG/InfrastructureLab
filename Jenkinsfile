@@ -36,7 +36,7 @@ pipeline {
            }
       stage('Verify'){
           steps {
-             scripts {
+             script {
                 def verificationResult = sh ( 
 
                   script: '''
