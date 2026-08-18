@@ -49,14 +49,14 @@ pipeline {
              script {
                 def verificationResult = sh ( 
 
-                  script: '''
+                  script: """
                    echo "Checking deployed application..."
                 
                   for i in $(seq 1 12); do
                        echo "Verification attempt $i..."
 
-                 if  curl -fsS http://localhost:8080/infrastructure-lab-1.2/ \
-                   | grep -q "Infrastructure Lab v1.2"; then
+                 if  curl -fsS http://localhost:8080/infrastructure-lab-${params.APPLICATION_VERSION}/ \\
+                   | grep -q "Infrastructure Lab v${params.APPLICATION_VERSION}"; then
 
                        echo "Application verification successful!"
                        exit 0
@@ -70,7 +70,7 @@ pipeline {
                   echo "Application verification FAILED!"
                   exit 1
 
-                ''',
+               """,
                returnStatus: true
 
              )
