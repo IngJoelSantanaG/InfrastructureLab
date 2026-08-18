@@ -30,6 +30,7 @@ pipeline {
 
      stage('Build') {
           steps {
+              sh "mvn versions:set -DnewVersion=${params.APPLICATION_VERSION}"
               sh 'mvn clean package'
               
             }
