@@ -52,8 +52,8 @@ pipeline {
                   script: """
                    echo "Checking deployed application..."
                 
-                  for i in $(seq 1 12); do
-                       echo "Verification attempt $i..."
+                  for i in \$(seq 1 12); do
+                       echo "Verification attempt \$i..."
 
                  if  curl -fsS http://localhost:8080/infrastructure-lab-${params.APPLICATION_VERSION}/ \\
                    | grep -q "Infrastructure Lab v${params.APPLICATION_VERSION}"; then
