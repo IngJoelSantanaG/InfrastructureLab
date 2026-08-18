@@ -5,6 +5,15 @@ pipeline {
       timestamps()
 
        }
+    
+   parameters {
+     string(
+          name: 'APPLICATION_VERSION',
+          defaultValue: '1.2',
+          description: 'Application version to build and deploy'
+
+          )
+        }
 
      stages {
         
