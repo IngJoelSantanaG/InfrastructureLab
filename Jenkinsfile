@@ -98,26 +98,26 @@ pipeline {
                }
 
              steps {
-                 sh '''
+                 sh """
                      echo "========================================"
                      echo "ROLLBACK STARTED"
                      echo "========================================"
 
-                     echo "Removing failed 1.2 WAR..."
-                     rm -f /var/lib/tomcat10/webapps/infrastructure-lab-1.2.war
+                     echo "Removing failed ${params.APPLICATION_VERSION} WAR..."
+                     rm -f /var/lib/tomcat10/webapps/infrastructure-lab-${params.APPLICATION_VERSION}.war
 
-                     echo "Known-good 1.1 WAR is already deployed."
+                     echo "Known-good version: ${params.KNOWN_GOOD_VERSION}"
                      echo "Waiting for application recovery..."
 
-                   for i in $(seq 1 12); do
-                          echo "Rollback verification attepmt $i..."
+                   for i in \$(seq 1 12); do
+                          echo "Rollback verification attepmt \$i..."
 
-                      if curl -fsS http://localhost:8080/infrastructure-lab-1.1/ \
-                         | grep -q "Infrastructure Lab v1.1"; then
+                      if curl -fsS http://localhost:8080/infrastructure-lab-${params.KNOWN_GOOD_VERSION}/ \\
+                         | grep -q "Infrastructure Lab v${params.KNOWN_GOOD_VERSION}"; then
                            
                             echo "================================="
                             echo "ROLLBACK SUCCESSFUL"
-                            echo "Infrastructure Lab 1.1 is healthy"
+                            echo "Infrastructure Lab ${params.KNOWN_GOOD_VERSION} is healthy"
                             echo "================================="
 
                            exit 0
@@ -134,7 +134,7 @@ pipeline {
 
                   exit 1
 
-              '''
+              """
 
           }         
 
