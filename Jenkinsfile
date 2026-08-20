@@ -13,6 +13,14 @@ pipeline {
           description: 'Application version to build and deploy'
 
           )
+
+     string(
+          name:'KNOWN_GOOD_VERSION',
+          defaultValue: '1.2',
+          description: 'Application version to build and deploy'
+
+         )
+
         }
 
      stages {
