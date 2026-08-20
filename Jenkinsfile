@@ -16,7 +16,7 @@ pipeline {
 
      string(
           name:'KNOWN_GOOD_VERSION',
-          defaultValue: '1.2',
+          defaultValue: '1.1',
           description: 'Application version to build and deploy'
 
          )
