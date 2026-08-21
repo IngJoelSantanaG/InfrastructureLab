@@ -14,13 +14,6 @@ pipeline {
 
           )
 
-     string(
-          name:'KNOWN_GOOD_VERSION',
-          defaultValue: '1.1',
-          description: 'Application version to build and deploy'
-
-         )
-
         }
 
 
@@ -129,25 +122,25 @@ pipeline {
                      echo "Removing failed ${params.APPLICATION_VERSION} WAR..."
                      rm -f /var/lib/tomcat10/webapps/infrastructure-lab-${params.APPLICATION_VERSION}.war
 
-                     echo "Known-good version: ${params.KNOWN_GOOD_VERSION}"
+                     echo "Known-good version: ${env.ACTUAL_KNOWN_GOOD}"
                      echo "Waiting for application recovery..."
 
                    for i in \$(seq 1 12); do
                           echo "Rollback verification attempt \$i..."
 
-                      if curl -fsS http://localhost:8080/infrastructure-lab-${params.KNOWN_GOOD_VERSION}/ \\
-                         | grep -q "Infrastructure Lab v${params.KNOWN_GOOD_VERSION}"; then
+                      if curl -fsS http://localhost:8080/infrastructure-lab-${env.ACTUAL_KNOWN_GOOD}/ \\
+                         | grep -q "Infrastructure Lab v${env.ACTUAL_KNOWN_GOOD}"; then
                            
                             echo "================================="
                             echo "ROLLBACK SUCCESSFUL"
-                            echo "Infrastructure Lab ${params.KNOWN_GOOD_VERSION} is healthy"
+                            echo "Infrastructure Lab ${env.ACTUAL_KNOWN_GOOD} is healthy"
                             echo "================================="
 
                            exit 0
 
                   fi
 
-                 echo "Known-good version ${params.KNOWN_GOOD_VERSION} not ready yet, Waiting 5 seconds..."
+                 echo "Known-good version ${env.ACTUAL_KNOWN_GOOD} not ready yet, Waiting 5 seconds..."
                  sleep 5
                done
 
