@@ -93,6 +93,28 @@ pipeline {
                }
              }
            }
+
+      stage ('Update Known-Good Version') {
+         when {
+          expression {
+               env.DEPLOYMENT_FAILED != 'true'
+            
+             }
+           }
+          
+        steps {
+
+          sh """
+              echo "Updating known-good version to ${params.APPLICATION_VERSION}..."
+              echo "${params.APPLICATION_VERSION}" > ${env.KNOWN_GOOD_FILE}
+
+             echo "Known-good version is now:"
+             cat ${env.KNOWN_GOOD_FILE}
+ 
+
+           """
+        }
+      }
          
       stage ('Rollback'){
            when {

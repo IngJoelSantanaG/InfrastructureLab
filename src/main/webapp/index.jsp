@@ -1,4 +1,3 @@
-<%@ this-is-intentionally-invalid%>
 <!DOCTYPE html>
 <html>
 <head>
