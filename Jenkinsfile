@@ -23,6 +23,15 @@ pipeline {
 
         }
 
+
+      environment {
+
+           KNOWN_GOOD_FILE = '/var/lib/jenkins/deployment-state/infrastructure-lab-known-good'
+
+
+
+           }
+
      stages {
         
            stage('Environment') {
@@ -98,6 +107,20 @@ pipeline {
                }
 
              steps {
+                  
+                 script {
+
+                    env.ACTUAL_KNOWN_GOOD = sh (
+                         script: "cat ${env.KNOWN_GOOD_FILE}",
+                         returnStdout: true
+                       ).trim()
+
+                    echo "Recovered known-good version: ${env.ACTUAL_KNOWN_GOOD}"
+
+
+                     }
+
+
                  sh """
                      echo "========================================"
                      echo "ROLLBACK STARTED"
