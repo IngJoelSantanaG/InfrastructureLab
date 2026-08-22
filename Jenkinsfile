@@ -39,7 +39,7 @@ pipeline {
           }
 
       stage ('Load Deployment State') {
-        step {
+        steps {
            script {
               env.ACTUAL_KNOWN_GOOD = sh (
                 script:  "cat ${env.KNOWN_GOOD_FILE}",
