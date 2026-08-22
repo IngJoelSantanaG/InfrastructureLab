@@ -36,7 +36,21 @@ pipeline {
 
             }
 
-         }
+          }
+
+      stage ('Load Deployment State') {
+        step {
+           script {
+              env.ACTUAL_KNOWN_GOOD = sh (
+                script:  "cat ${env.KNOWN_GOOD_FILE}",
+                returnStdout: true
+                ).trim()
+
+           echo "Current known-good version: ${env.ACTUAL_KNOWN_GOOD}"
+
+               }
+             }
+           }
 
      stage('Build') {
           steps {
