@@ -137,18 +137,6 @@ pipeline {
 
              steps {
                   
-                 script {
-
-                    env.ACTUAL_KNOWN_GOOD = sh (
-                         script: "cat ${env.KNOWN_GOOD_FILE}",
-                         returnStdout: true
-                       ).trim()
-
-                    echo "Recovered known-good version: ${env.ACTUAL_KNOWN_GOOD}"
-
-
-                     }
-
 
                  sh """
                      echo "========================================"
