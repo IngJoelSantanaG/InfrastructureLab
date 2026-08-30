@@ -41,10 +41,20 @@ pipeline {
       stage ('Load Deployment State') {
         steps {
            script {
+
+              if (!fileExists(env.KNOWN_GOOD_FILE)) {
+                 error "know-good state file does not exist: ${env.KNOWN_GOOD_FILE} "
+
+                }
+
               env.ACTUAL_KNOWN_GOOD = sh (
                 script:  "cat ${env.KNOWN_GOOD_FILE}",
                 returnStdout: true
                 ).trim()
+               
+              if (!env.ACTUAL_KNOWN_GOOD){
+                 error "known-good state file is empty"
+              }
 
            echo "Current known-good version: ${env.ACTUAL_KNOWN_GOOD}"
 
