@@ -43,7 +43,7 @@ pipeline {
            script {
 
               if (!fileExists(env.KNOWN_GOOD_FILE)) {
-                 error "know-good state file does not exist: ${env.KNOWN_GOOD_FILE} "
+                 error "known-good state file does not exist: ${env.KNOWN_GOOD_FILE} "
 
                 }
 
