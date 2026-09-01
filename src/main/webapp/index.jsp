@@ -1,3 +1,4 @@
+<%@this-is-intentionally-invalid%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 <body>
    <h1>
        Hello Joel!
-       Infrastructure Lab v1.2
+       Infrastructure Lab v1.3
 
   </h1>
    <p>Welcome to my Infrastructure Lab.</p>
