@@ -185,6 +185,11 @@ pipeline {
                   exit 1
 
               """
+            script {
+              currentBuild.result = 'UNSTABLE'
+              echo "Deployment failed, but rollback succeeded."
+
+           }
 
           }         
 
