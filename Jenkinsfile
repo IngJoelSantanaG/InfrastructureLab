@@ -208,7 +208,10 @@ pipeline {
            echo 'Build or deployment SUCCESS'
 
           }
+       unstable {
+           echo 'Deployment FAILED, but rollback was SUCCESSFUL'
 
+          }
        failure {
            echo 'Build or deployment FAILED'
        
